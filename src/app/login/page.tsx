@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import LoginForm from '@/components/LoginForm';
 
 export const metadata: Metadata = {
   title: 'Masuk',
@@ -7,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[var(--ivory)]">
-      <p className="text-[var(--text-mid)]">Halaman login — menyusul di task berikutnya.</p>
-    </main>
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }

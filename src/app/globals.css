@@ -1302,6 +1302,190 @@ footer {
   color: var(--gold);
 }
 
+/* ── ADMIN (placeholder, dashboard lengkap menyusul) ── */
+.admin-shell {
+  min-height: 100vh;
+  background: var(--ivory);
+}
+.admin-topbar {
+  background: var(--navy);
+  padding: 20px 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-topbar-logo {
+  font-family: var(--font-display), serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ivory);
+}
+.admin-topbar-logo span {
+  color: var(--gold);
+}
+.admin-signout {
+  font-family: var(--font-body), sans-serif;
+  font-size: 13px;
+  color: rgba(250, 247, 242, 0.7);
+  background: none;
+  border: 1px solid rgba(250, 247, 242, 0.25);
+  padding: 7px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.admin-signout:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.admin-content {
+  padding: 48px 5vw;
+  max-width: 720px;
+}
+.admin-content h1 {
+  font-family: var(--font-display), serif;
+  font-size: 28px;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.admin-content p {
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.admin-badge {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold-pale);
+  color: var(--navy);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* ── LOGIN PAGE ── */
+.login-page {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  background: var(--ivory);
+  border-radius: 12px;
+  padding: 40px 32px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+}
+.login-logo {
+  font-family: var(--font-display), serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  display: block;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+.login-logo span {
+  color: var(--gold);
+}
+.login-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 32px;
+}
+.login-field {
+  margin-bottom: 18px;
+}
+.login-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+.login-field input {
+  width: 100%;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  padding: 11px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-navy);
+  background: var(--white);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.login-field input:focus {
+  border-color: var(--gold);
+}
+.login-submit {
+  width: 100%;
+  margin-top: 8px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--gold);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+.login-submit:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+.login-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.login-error {
+  background: #fdecea;
+  border: 1px solid #f3c1bc;
+  color: #a63d33;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+.login-back {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.login-back:hover {
+  color: var(--text-mid);
+}
+
 /* ── STATIC PAGES (FAQ, Terms, Privacy) ── */
 .static-page {
   background: var(--ivory);
