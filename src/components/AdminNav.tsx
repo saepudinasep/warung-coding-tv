@@ -2,28 +2,33 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const navItems = [
-  { href: '/admin', label: 'Dashboard' },
-  { href: '/admin/customers', label: 'Pelanggan' },
-  { href: '/admin/orders', label: 'Pesanan' },
-  { href: '/admin/templates', label: 'Template' },
+  { href: '/admin', label: 'Dashboard', adminOnly: false },
+  { href: '/admin/customers', label: 'Pelanggan', adminOnly: false },
+  { href: '/admin/orders', label: 'Pesanan', adminOnly: false },
+  { href: '/admin/templates', label: 'Template', adminOnly: true },
 ];
 
 export default function AdminNav() {
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const role = session?.user?.role;
 
   return (
     <nav className="admin-nav">
-      {navItems.map((item) => {
-        const isActive =
-          item.href === '/admin' ? pathname === '/admin' : pathname.startsWith(item.href);
-        return (
-          <Link key={item.href} href={item.href} className={isActive ? 'active' : ''}>
-            {item.label}
-          </Link>
-        );
-      })}
+      {navItems
+        .filter((item) => !item.adminOnly || role === 'ADMIN')
+        .map((item) => {
+          const isActive =
+            item.href === '/admin' ? pathname === '/admin' : pathname.startsWith(item.href);
+          return (
+            <Link key={item.href} href={item.href} className={isActive ? 'active' : ''}>
+              {item.label}
+            </Link>
+          );
+        })}
     </nav>
   );
 }

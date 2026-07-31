@@ -80,22 +80,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  callbacks: {
-    ...authConfig.callbacks,
-    async jwt({ token, user }) {
-      if (user) {
-        token.userType = user.userType;
-        token.role = user.role;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.sub as string;
-        session.user.userType = token.userType as 'admin' | 'customer';
-        session.user.role = token.role as 'ADMIN' | 'STAFF' | undefined;
-      }
-      return session;
-    },
-  },
 });

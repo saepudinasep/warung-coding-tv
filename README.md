@@ -47,7 +47,7 @@ Cek hasilnya lewat Prisma Studio (GUI database di browser):
 npm run db:studio
 ```
 
-> Catatan: `npm run db:seed` membuat user admin dengan email `admin@warungcoding.tv` dan password dummy `ganti-password-ini` (sudah di-hash bcrypt di `prisma/seed.ts`). **Wajib ganti password ini** sebelum dipakai di production — edit langsung di `prisma/seed.ts` sebelum seed pertama kali, atau update manual lewat Prisma Studio.
+> Catatan: `npm run db:seed` membuat user admin (`admin@warungcoding.tv`) dan user staff (`staff@warungcoding.tv`) — keduanya pakai password dummy `ganti-password-ini` (sudah di-hash bcrypt di `prisma/seed.ts`). User staff berguna untuk menguji role-based access control (menu **Template** cuma muncul/bisa diakses oleh role ADMIN). **Wajib ganti kedua password ini** sebelum dipakai di production — edit langsung di `prisma/seed.ts` sebelum seed pertama kali, atau update manual lewat Prisma Studio.
 
 Kalau schema berubah di kemudian hari (nambah kolom/tabel baru), jalankan ulang `npm run db:migrate` untuk generate migration baru — jangan edit tabel di Neon secara manual.
 

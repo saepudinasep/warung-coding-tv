@@ -72,6 +72,19 @@ async function main() {
     },
   });
 
+  // --- Staff user (untuk uji role-based access control) -----------
+  const staffPassword = await bcrypt.hash('ganti-password-ini', 10);
+  await prisma.user.upsert({
+    where: { email: 'staff@warungcoding.tv' },
+    update: {},
+    create: {
+      name: 'Staff CS',
+      email: 'staff@warungcoding.tv',
+      password: staffPassword,
+      role: 'STAFF',
+    },
+  });
+
   // --- Dummy customers + orders (untuk demo Dashboard CRM) --------
   const customerPassword = await bcrypt.hash('customer123', 10);
   const dummyCustomers = [
@@ -142,7 +155,9 @@ async function main() {
     }
   }
 
-  console.log('Seed selesai: 3 Package + 1 User admin + 4 Customer dummy dengan order.');
+  console.log(
+    'Seed selesai: 3 Package + 1 User admin + 1 User staff + 4 Customer dummy dengan order.',
+  );
 }
 
 main()
