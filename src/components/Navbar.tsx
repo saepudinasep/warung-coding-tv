@@ -35,10 +35,10 @@ export default function Navbar() {
       </ul>
 
       <div className="nav-actions hidden md:flex">
-        <Link href="/login" className="btn-ghost">
+        <Link href="/masuk" className="btn-ghost">
           Masuk
         </Link>
-        <Link href="/login" className="btn-primary">
+        <Link href="/daftar" className="btn-primary">
           Buat Undangan
         </Link>
       </div>
@@ -67,10 +67,10 @@ export default function Navbar() {
             </a>
           ))}
           <div className="mt-3 flex gap-3">
-            <Link href="/login" className="btn-ghost">
+            <Link href="/masuk" className="btn-ghost">
               Masuk
             </Link>
-            <Link href="/login" className="btn-primary">
+            <Link href="/daftar" className="btn-primary">
               Buat Undangan
             </Link>
           </div>

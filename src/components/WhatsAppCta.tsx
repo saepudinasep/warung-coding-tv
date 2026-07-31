@@ -15,7 +15,7 @@ export default function WhatsAppCta() {
           undangan personal ke setiap nomor WhatsApp secara otomatis — lengkap dengan nama tamu di
           setiap pesan.
         </p>
-        <Link href="/login" className="btn-primary">
+        <Link href="/daftar" className="btn-primary">
           Coba WhatsApp Blast ›
         </Link>
       </div>

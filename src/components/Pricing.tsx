@@ -97,7 +97,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <Link href="/login" className="pricing-card-btn">
+            <Link href="/daftar" className="pricing-card-btn">
               {p.cta}
             </Link>
           </div>

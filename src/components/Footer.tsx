@@ -34,13 +34,13 @@ export default function Footer() {
           <h4>Akun</h4>
           <ul>
             <li>
-              <Link href="/login">Masuk</Link>
+              <Link href="/masuk">Masuk</Link>
             </li>
             <li>
-              <Link href="/login">Daftar Gratis</Link>
+              <Link href="/daftar">Daftar Gratis</Link>
             </li>
             <li>
-              <Link href="/login">Dashboard</Link>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
           </ul>
         </div>

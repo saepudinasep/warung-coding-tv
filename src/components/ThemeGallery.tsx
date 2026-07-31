@@ -177,7 +177,7 @@ export default function ThemeGallery() {
       </FadeUp>
 
       <div className="themes-cta">
-        <Link href="/login" className="btn-gold">
+        <Link href="/daftar" className="btn-gold">
           Lihat Semua 50+ Tema &amp; Pilih Desain ›
         </Link>
         <p style={{ marginTop: 16, fontSize: 13, fontWeight: 300, color: 'rgba(250,247,242,0.4)' }}>

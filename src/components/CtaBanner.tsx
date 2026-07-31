@@ -14,7 +14,7 @@ export default function CtaBanner() {
         Warung Coding TV.
       </p>
       <div className="cta-actions">
-        <Link href="/login" className="btn-gold">
+        <Link href="/daftar" className="btn-gold">
           Buat Undangan Gratis ›
         </Link>
         <a href="#tema" className="btn-outline-ivory">

@@ -10,8 +10,16 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request }) {
       const isLoggedIn = !!auth?.user;
-      const isOnAdmin = request.nextUrl.pathname.startsWith('/admin');
-      return isOnAdmin ? isLoggedIn : true;
+      const userType = auth?.user?.userType;
+      const path = request.nextUrl.pathname;
+
+      if (path.startsWith('/admin')) {
+        return isLoggedIn && userType === 'admin';
+      }
+      if (path.startsWith('/dashboard')) {
+        return isLoggedIn && userType === 'customer';
+      }
+      return true;
     },
   },
   providers: [],

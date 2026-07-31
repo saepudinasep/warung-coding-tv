@@ -5,10 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 
-export default function LoginForm() {
+export default function CustomerLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callbackUrl') ?? '/admin';
+  const callbackUrl = searchParams.get('callbackUrl') ?? '/dashboard';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +20,7 @@ export default function LoginForm() {
     setError(null);
     setLoading(true);
 
-    const result = await signIn('admin-credentials', {
+    const result = await signIn('customer-credentials', {
       email,
       password,
       redirect: false,
@@ -43,7 +43,7 @@ export default function LoginForm() {
         <Link href="/" className="login-logo">
           Warung Coding TV<span>.</span>
         </Link>
-        <p className="login-sub">Masuk ke dashboard CRM</p>
+        <p className="login-sub">Masuk ke akun Anda</p>
 
         {error && <div className="login-error">{error}</div>}
 
@@ -74,6 +74,13 @@ export default function LoginForm() {
             {loading ? 'Memproses...' : 'Masuk'}
           </button>
         </form>
+
+        <p className="login-sub" style={{ marginTop: 20, marginBottom: 0 }}>
+          Belum punya akun?{' '}
+          <Link href="/daftar" style={{ color: 'var(--navy)', fontWeight: 500 }}>
+            Daftar gratis
+          </Link>
+        </p>
 
         <Link href="/" className="login-back">
           ← Kembali ke beranda

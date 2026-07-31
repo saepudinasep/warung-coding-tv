@@ -25,7 +25,7 @@ export default function Hero() {
           desain eksklusif, kirim ke tamu via WhatsApp, dan pantau RSVP secara real-time.
         </p>
         <div className="hero-actions">
-          <Link href="/login" className="btn-gold">
+          <Link href="/daftar" className="btn-gold">
             Buat Undangan Sekarang ›
           </Link>
           <a href="#tema" className="btn-outline-ivory">
