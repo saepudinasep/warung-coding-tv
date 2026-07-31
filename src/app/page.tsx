@@ -6,6 +6,8 @@ import ThemeGallery from '@/components/ThemeGallery';
 import FeatureList from '@/components/FeatureList';
 import WhatsAppCta from '@/components/WhatsAppCta';
 import Pricing from '@/components/Pricing';
+import Testimonials from '@/components/Testimonials';
+import CtaBanner from '@/components/CtaBanner';
 
 export default function Home() {
   return (
@@ -19,7 +21,9 @@ export default function Home() {
         <FeatureList />
         <WhatsAppCta />
         <Pricing />
-        {/* Section berikutnya (testimoni, footer) menyusul di task selanjutnya */}
+        <Testimonials />
+        <CtaBanner />
+        {/* Footer menyusul di task selanjutnya */}
       </main>
     </>
   );
