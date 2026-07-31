@@ -8,6 +8,7 @@ import WhatsAppCta from '@/components/WhatsAppCta';
 import Pricing from '@/components/Pricing';
 import Testimonials from '@/components/Testimonials';
 import CtaBanner from '@/components/CtaBanner';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -23,8 +24,8 @@ export default function Home() {
         <Pricing />
         <Testimonials />
         <CtaBanner />
-        {/* Footer menyusul di task selanjutnya */}
       </main>
+      <Footer />
     </>
   );
 }
