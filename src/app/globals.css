@@ -518,4 +518,153 @@ section {
     gap: 24px;
     flex-wrap: wrap;
   }
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+  .how-steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 0;
+  }
+  .how-steps::before {
+    display: none;
+  }
+}
+
+/* ── WHY US ── */
+.why-section {
+  background: var(--white);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border-navy);
+  border: 1px solid var(--border-navy);
+}
+.why-card {
+  background: var(--white);
+  padding: 48px 40px;
+  position: relative;
+  transition: all 0.3s;
+}
+.why-card:hover {
+  background: var(--ivory);
+}
+.why-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+.why-card h3 {
+  font-family: var(--font-display), serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.why-card p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-mid);
+}
+.why-card-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.why-card:hover .why-card-accent {
+  transform: scaleX(1);
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  background: var(--ivory);
+}
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  margin-top: 60px;
+}
+.how-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: calc(12.5% + 24px);
+  right: calc(12.5% + 24px);
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.3;
+}
+.how-step {
+  padding: 0 24px;
+  text-align: center;
+}
+.how-step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-family: var(--font-display), serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gold);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+.how-step:hover .how-step-num {
+  background: var(--navy);
+  color: var(--gold);
+  border-color: var(--navy);
+}
+.how-step h3 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.how-step p {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-mid);
+}
+.how-step-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+/* ── FADE-UP (scroll reveal) ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
