@@ -1,66 +1,78 @@
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 async function main() {
   // --- Packages -------------------------------------------------
   await prisma.package.upsert({
-    where: { id: "pkg-gratis" },
+    where: { id: 'pkg-gratis' },
     update: {},
     create: {
-      id: "pkg-gratis",
-      name: "Gratis",
+      id: 'pkg-gratis',
+      name: 'Gratis',
       price: 0,
       maxInvitation: 1,
       maxGuest: 50,
       activeDays: 14,
-      features: ["1 undangan", "Maks. 50 tamu", "Aktif 14 hari", "Watermark Amoura"],
+      features: ['1 undangan', 'Maks. 50 tamu', 'Aktif 14 hari', 'Watermark Amoura'],
     },
   });
 
   await prisma.package.upsert({
-    where: { id: "pkg-premium" },
+    where: { id: 'pkg-premium' },
     update: {},
     create: {
-      id: "pkg-premium",
-      name: "Premium",
+      id: 'pkg-premium',
+      name: 'Premium',
       price: 149_000,
       maxInvitation: 1,
       maxGuest: null,
       activeDays: null,
-      features: ["1 undangan", "Tamu unlimited", "Aktif selamanya", "Tanpa watermark", "RSVP & ucapan"],
+      features: [
+        '1 undangan',
+        'Tamu unlimited',
+        'Aktif selamanya',
+        'Tanpa watermark',
+        'RSVP & ucapan',
+      ],
     },
   });
 
   await prisma.package.upsert({
-    where: { id: "pkg-duo" },
+    where: { id: 'pkg-duo' },
     update: {},
     create: {
-      id: "pkg-duo",
-      name: "Duo",
+      id: 'pkg-duo',
+      name: 'Duo',
       price: 249_000,
       maxInvitation: 2,
       maxGuest: null,
       activeDays: null,
-      features: ["2 undangan", "Tamu unlimited", "Aktif selamanya", "Tanpa watermark", "WhatsApp blast"],
+      features: [
+        '2 undangan',
+        'Tamu unlimited',
+        'Aktif selamanya',
+        'Tanpa watermark',
+        'WhatsApp blast',
+      ],
     },
   });
 
   // --- Admin user -------------------------------------------------
-  const hashedPassword = await bcrypt.hash("ganti-password-ini", 10);
+  const hashedPassword = await bcrypt.hash('ganti-password-ini', 10);
   await prisma.user.upsert({
-    where: { email: "admin@warungcoding.tv" },
+    where: { email: 'admin@warungcoding.tv' },
     update: {},
     create: {
-      name: "Admin",
-      email: "admin@warungcoding.tv",
+      name: 'Admin',
+      email: 'admin@warungcoding.tv',
       password: hashedPassword,
-      role: "ADMIN",
+      role: 'ADMIN',
     },
   });
 
-  console.log("Seed selesai: 3 Package + 1 User admin.");
+  console.log('Seed selesai: 3 Package + 1 User admin.');
 }
 
 main()

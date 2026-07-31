@@ -1,0 +1,7 @@
+export default function LoginPage() {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-[var(--ivory)]">
+      <p className="text-[var(--text-mid)]">Halaman login — menyusul di task berikutnya.</p>
+    </main>
+  );
+}
