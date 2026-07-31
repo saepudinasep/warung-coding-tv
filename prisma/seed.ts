@@ -119,7 +119,7 @@ async function main() {
 
     const pkg = await prisma.package.findUniqueOrThrow({ where: { id: c.pkg } });
 
-    await prisma.order.create({
+    const order = await prisma.order.create({
       data: {
         customerId: customer.id,
         packageId: pkg.id,
@@ -127,6 +127,19 @@ async function main() {
         totalAmount: pkg.price,
       },
     });
+
+    if (c.status === 'PAID' && pkg.price > 0) {
+      await prisma.payment.create({
+        data: {
+          orderId: order.id,
+          amount: pkg.price,
+          method: 'QRIS',
+          status: 'SUCCESS',
+          providerRefId: `DEMO-${order.id.slice(-6).toUpperCase()}`,
+          paidAt: new Date(),
+        },
+      });
+    }
   }
 
   console.log('Seed selesai: 3 Package + 1 User admin + 4 Customer dummy dengan order.');
