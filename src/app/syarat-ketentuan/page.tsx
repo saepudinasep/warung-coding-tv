@@ -3,7 +3,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Syarat & Ketentuan — Warung Coding TV',
+  title: 'Syarat & Ketentuan',
+  description: 'Syarat dan ketentuan penggunaan layanan undangan digital Warung Coding TV.',
 };
 
 export default function TermsPage() {

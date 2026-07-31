@@ -1371,6 +1371,24 @@ footer {
     gap: 16px;
     text-align: center;
   }
+  .hero {
+    padding: 100px 6vw 60px;
+  }
+  .static-page {
+    padding: 120px 6vw 64px;
+  }
+  section {
+    padding: 72px 6vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-stats {
+    gap: 20px;
+  }
+  .pricing-card {
+    padding: 32px 24px;
+  }
 }
 
 /* ── FADE-UP (scroll reveal) ── */

@@ -3,7 +3,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'FAQ — Warung Coding TV',
+  title: 'FAQ',
+  description:
+    'Pertanyaan yang sering diajukan seputar undangan digital Warung Coding TV — legalitas, masa aktif paket, WhatsApp blast, keamanan data, dan lainnya.',
 };
 
 const faqs = [

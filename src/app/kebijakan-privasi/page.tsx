@@ -3,7 +3,9 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Kebijakan Privasi — Warung Coding TV',
+  title: 'Kebijakan Privasi',
+  description:
+    'Kebijakan privasi Warung Coding TV — bagaimana kami mengumpulkan, menggunakan, dan melindungi data Anda serta data tamu undangan Anda.',
 };
 
 export default function PrivacyPage() {
