@@ -1,0 +1,267 @@
+// ============================================================
+// Amoura — Undangan Digital Pernikahan + CRM
+// Prisma schema (PostgreSQL / Neon)
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ------------------------------------------------------------
+// ENUMS
+// ------------------------------------------------------------
+
+enum UserRole {
+  ADMIN
+  STAFF
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  EXPIRED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  QRIS
+  VIRTUAL_ACCOUNT
+  E_WALLET
+  BANK_TRANSFER
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum RsvpStatus {
+  PENDING
+  ATTENDING
+  NOT_ATTENDING
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+  MUSIC
+}
+
+enum WaBlastStatus {
+  QUEUED
+  SENT
+  FAILED
+}
+
+// ------------------------------------------------------------
+// USER (staf/admin internal — CRM)
+// ------------------------------------------------------------
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(STAFF)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  handledOrders Order[] @relation("OrderHandledBy")
+
+  @@map("users")
+}
+
+// ------------------------------------------------------------
+// CUSTOMER (pelanggan yang membeli paket undangan)
+// ------------------------------------------------------------
+
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  orders Order[]
+
+  @@map("customers")
+}
+
+// ------------------------------------------------------------
+// PACKAGE (paket harga: Gratis, Premium, Duo, dst)
+// ------------------------------------------------------------
+
+model Package {
+  id            String   @id @default(cuid())
+  name          String
+  price         Int // dalam Rupiah, 0 untuk paket gratis
+  maxInvitation Int      @default(1) // Duo = 2
+  maxGuest      Int? // null = unlimited
+  activeDays    Int? // null = selamanya, 14 untuk trial
+  features      Json // list fitur untuk ditampilkan di pricing card
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders Order[]
+
+  @@map("packages")
+}
+
+// ------------------------------------------------------------
+// ORDER (transaksi pembelian paket oleh customer)
+// ------------------------------------------------------------
+
+model Order {
+  id          String      @id @default(cuid())
+  customerId  String
+  customer    Customer    @relation(fields: [customerId], references: [id])
+  packageId   String
+  package     Package     @relation(fields: [packageId], references: [id])
+  handledById String?
+  handledBy   User?       @relation("OrderHandledBy", fields: [handledById], references: [id])
+  status      OrderStatus @default(PENDING)
+  totalAmount Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  invitations Invitation[]
+  payments    Payment[]
+
+  @@index([customerId])
+  @@index([status])
+  @@map("orders")
+}
+
+// ------------------------------------------------------------
+// PAYMENT (riwayat pembayaran per order — bisa lebih dari satu percobaan)
+// ------------------------------------------------------------
+
+model Payment {
+  id            String        @id @default(cuid())
+  orderId       String
+  order         Order         @relation(fields: [orderId], references: [id])
+  amount        Int
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  providerRefId String? // reference id dari Midtrans/Xendit
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+
+  @@index([orderId])
+  @@map("payments")
+}
+
+// ------------------------------------------------------------
+// TEMPLATE (tema/desain undangan yang dikelola admin)
+// ------------------------------------------------------------
+
+model Template {
+  id          String   @id @default(cuid())
+  name        String
+  category    String // modern, islami, elegan, minimalis, dst
+  thumbnail   String
+  previewUrl  String?
+  isPremium   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  invitations Invitation[]
+
+  @@map("templates")
+}
+
+// ------------------------------------------------------------
+// INVITATION (undangan yang dihasilkan dari satu Order)
+// ------------------------------------------------------------
+
+model Invitation {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id])
+  templateId  String
+  template    Template @relation(fields: [templateId], references: [id])
+  slug        String   @unique // amoura.id/{slug}
+  groomName   String
+  brideName   String
+  eventDate   DateTime
+  location    String?
+  settings    Json? // musik, warna, teks tambahan, dsb
+  isActive    Boolean  @default(true)
+  expiresAt   DateTime? // null = selamanya, terisi untuk paket trial
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  guests  Guest[]
+  wishes  Wish[]
+  media   Media[]
+
+  @@index([orderId])
+  @@map("invitations")
+}
+
+// ------------------------------------------------------------
+// GUEST (tamu yang diundang — 1 tamu = 1 link personal)
+// ------------------------------------------------------------
+
+model Guest {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id])
+  name         String
+  phone        String
+  slug         String // dipakai untuk link personal: /{invitationSlug}?to={slug}
+  rsvpStatus   RsvpStatus @default(PENDING)
+  guestCount   Int        @default(1) // jumlah orang yang akan hadir
+  waStatus     WaBlastStatus?
+  waSentAt     DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([invitationId, slug])
+  @@index([invitationId])
+  @@map("guests")
+}
+
+// ------------------------------------------------------------
+// WISH (ucapan & doa dari tamu)
+// ------------------------------------------------------------
+
+model Wish {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id])
+  name         String
+  message      String
+  createdAt    DateTime   @default(now())
+
+  @@index([invitationId])
+  @@map("wishes")
+}
+
+// ------------------------------------------------------------
+// MEDIA (foto, video, musik latar per undangan)
+// ------------------------------------------------------------
+
+model Media {
+  id           String     @id @default(cuid())
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id])
+  type         MediaType
+  url          String
+  order        Int        @default(0) // urutan tampil di galeri
+  createdAt    DateTime   @default(now())
+
+  @@index([invitationId])
+  @@map("media")
+}
