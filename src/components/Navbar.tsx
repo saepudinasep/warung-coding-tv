@@ -21,7 +21,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={scrolled ? 'scrolled' : ''}>
+    <nav className={`site-nav${scrolled ? 'scrolled' : ''}`}>
       <Link href="/" className="nav-logo">
         Warung Coding TV<span>.</span>
       </Link>

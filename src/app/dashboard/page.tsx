@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 import CustomerSignOutButton from '@/components/CustomerSignOutButton';
 
 export const metadata: Metadata = {
@@ -7,8 +9,23 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+const dateFormatter = new Intl.DateTimeFormat('id-ID', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
 export default async function DashboardPage() {
   const session = await auth();
+
+  const invitations = await prisma.invitation.findMany({
+    where: { order: { customerId: session?.user?.id } },
+    include: { template: true, order: { include: { package: true } } },
+    orderBy: { createdAt: 'desc' },
+  });
 
   return (
     <div className="admin-shell">
@@ -18,12 +35,53 @@ export default async function DashboardPage() {
         </span>
         <CustomerSignOutButton />
       </div>
-      <div className="admin-content">
+      <div className="admin-content" style={{ maxWidth: 720 }}>
         <h1>Selamat datang, {session?.user?.name}</h1>
-        <p>{session?.user?.email}</p>
-        <p style={{ marginTop: 32 }}>
-          Checkout paket, pilih template, dan builder undangan menyusul di task berikutnya (kategori
-          &ldquo;Modul Undangan&rdquo; dan &ldquo;Paket &amp; Pembayaran&rdquo;).
+        <p style={{ marginBottom: 32 }}>{session?.user?.email}</p>
+
+        {invitations.length === 0 ? (
+          <div className="dashboard-empty">
+            <p>Anda belum punya undangan. Yuk buat yang pertama — gratis untuk mulai.</p>
+            <Link href="/dashboard/undangan/baru" className="btn-admin btn-admin-primary">
+              + Buat Undangan Pertama
+            </Link>
+          </div>
+        ) : (
+          <>
+            {invitations.map((inv) => (
+              <div className="dashboard-invite-card" key={inv.id}>
+                <div className="dashboard-invite-thumb">
+                  <img src={inv.template.thumbnail} alt={inv.template.name} loading="lazy" />
+                </div>
+                <div className="dashboard-invite-body">
+                  <div className="dashboard-invite-names">
+                    {inv.groomName} &amp; {inv.brideName}
+                  </div>
+                  <div className="dashboard-invite-meta">{dateFormatter.format(inv.eventDate)}</div>
+                  {inv.location && <div className="dashboard-invite-meta">{inv.location}</div>}
+                  <div className="dashboard-invite-meta">
+                    Tema: {inv.template.name} · Paket: {inv.order.package.name}
+                  </div>
+                  <div className="dashboard-invite-actions">
+                    <Link
+                      href={`/dashboard/undangan/${inv.id}/edit`}
+                      className="btn-admin btn-admin-secondary"
+                    >
+                      Edit
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <Link href="/dashboard/undangan/baru" className="btn-admin btn-admin-primary">
+              + Buat Undangan Baru
+            </Link>
+          </>
+        )}
+
+        <p style={{ marginTop: 40, fontSize: 13, color: 'var(--text-muted)' }}>
+          Manajemen tamu, RSVP, dan halaman publik undangan menyusul di task berikutnya.
         </p>
       </div>
     </div>

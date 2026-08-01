@@ -26,6 +26,9 @@ Bagian ini **wajib** dilakukan sebelum menjalankan aplikasi — tanpa ini, halam
 3. Setelah project dibuat, buka tab **Connect** di dashboard Neon. Kamu akan melihat dua jenis connection string:
    - **Pooled connection** (ada `-pooler` di hostname) → dipakai sebagai `DATABASE_URL`
    - **Direct connection** (tanpa `-pooler`) → dipakai sebagai `DIRECT_URL` (dibutuhkan Prisma khusus saat migrate)
+
+   Neon biasanya kasih connection string dengan `?sslmode=require` di akhir — **ganti jadi `?sslmode=verify-full`** di kedua URL. Kalau tetap pakai `require`, aplikasi akan jalan normal tapi driver `pg` akan memunculkan deprecation warning di console/terminal (bukan error fatal, tapi mengganggu saat development).
+
 4. Copy `.env.example` menjadi `.env`:
    ```bash
    cp .env.example .env

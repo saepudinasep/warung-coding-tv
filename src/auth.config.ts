@@ -5,9 +5,7 @@ import type { NextAuthConfig } from 'next-auth';
 // jadi aman dipakai proxy.ts (yang butuh cek role/userType saat proteksi route).
 // Provider dengan akses database (Credentials + Prisma) ditambahkan terpisah di auth.ts.
 export const authConfig = {
-  pages: {
-    signIn: '/login',
-  },
+  trustHost: true,
   session: { strategy: 'jwt' },
   callbacks: {
     authorized({ auth, request }) {
@@ -16,10 +14,16 @@ export const authConfig = {
       const path = request.nextUrl.pathname;
 
       if (path.startsWith('/admin')) {
-        return isLoggedIn && userType === 'admin';
+        if (isLoggedIn && userType === 'admin') return true;
+        const loginUrl = new URL('/login', request.nextUrl.origin);
+        loginUrl.searchParams.set('callbackUrl', request.nextUrl.href);
+        return Response.redirect(loginUrl);
       }
       if (path.startsWith('/dashboard')) {
-        return isLoggedIn && userType === 'customer';
+        if (isLoggedIn && userType === 'customer') return true;
+        const loginUrl = new URL('/masuk', request.nextUrl.origin);
+        loginUrl.searchParams.set('callbackUrl', request.nextUrl.href);
+        return Response.redirect(loginUrl);
       }
       return true;
     },

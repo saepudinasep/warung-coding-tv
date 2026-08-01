@@ -35,7 +35,7 @@ body {
 }
 
 /* ── NAV ── */
-nav {
+.site-nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -51,7 +51,7 @@ nav {
   border-bottom: 1px solid var(--border-navy);
   transition: all 0.3s;
 }
-nav.scrolled {
+.site-nav.scrolled {
   height: 60px;
   background: rgba(250, 247, 242, 0.97);
   box-shadow: 0 2px 24px rgba(13, 27, 42, 0.08);
@@ -1297,6 +1297,14 @@ footer {
 .footer-copy span {
   color: var(--gold);
 }
+.footer-admin-link {
+  color: rgba(250, 247, 242, 0.2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-admin-link:hover {
+  color: rgba(250, 247, 242, 0.5);
+}
 .footer-social {
   display: flex;
   gap: 16px;
@@ -1904,6 +1912,106 @@ footer {
   }
   .order-detail-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.template-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+.template-picker-card {
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--white);
+  box-shadow: 0 0 0 1px var(--border-navy);
+  transition: all 0.15s;
+}
+.template-picker-card:hover {
+  box-shadow: 0 0 0 1px var(--gold);
+}
+.template-picker-card.selected {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+.template-picker-thumb {
+  height: 110px;
+  background: var(--gold-pale);
+}
+.template-picker-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.template-picker-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navy);
+  padding: 8px 10px 10px;
+}
+
+.dashboard-invite-card {
+  background: var(--white);
+  border: 1px solid var(--border-navy);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 20px;
+}
+.dashboard-invite-thumb {
+  flex: 0 0 140px;
+  background: var(--gold-pale);
+}
+.dashboard-invite-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.dashboard-invite-body {
+  padding: 20px 24px;
+  flex: 1;
+}
+.dashboard-invite-names {
+  font-family: var(--font-display), serif;
+  font-size: 19px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.dashboard-invite-meta {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 4px;
+}
+.dashboard-invite-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+.dashboard-empty {
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--white);
+  border: 1px dashed var(--border-navy);
+  border-radius: 12px;
+}
+.dashboard-empty p {
+  font-size: 14px;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .dashboard-invite-card {
+    flex-direction: column;
+  }
+  .dashboard-invite-thumb {
+    flex: none;
+    height: 140px;
   }
 }
 

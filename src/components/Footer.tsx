@@ -67,7 +67,10 @@ export default function Footer() {
       <div className="footer-bottom">
         <p className="footer-copy">
           © 2026 <span>Warung Coding TV</span>. Semua hak dilindungi. Dibuat dengan ♡ untuk setiap
-          pasangan Indonesia.
+          pasangan Indonesia. ·{' '}
+          <Link href="/login" className="footer-admin-link">
+            Admin
+          </Link>
         </p>
         <div className="footer-social">
           <a href="#" aria-label="Instagram">
