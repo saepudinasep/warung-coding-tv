@@ -31,7 +31,7 @@ export default function WhatsAppCta() {
         <div className="wa-bubble">
           <div className="wa-bubble-name">Untuk: Ibu Ratna Dewi 💌</div>
           Assalamu&rsquo;alaikum Ibu Ratna, dengan penuh sukacita kami mengundang Ibu untuk hadir di
-          pernikahan kami 🌸 Detail acara &amp; RSVP: wct.id/rizky-salsa
+          pernikahan kami 🌸 Detail acara &amp; RSVP: wctv.id/rizky-salsa
           <div className="wa-bubble-time">10:24 ✓✓</div>
         </div>
         <div className="wa-count">
