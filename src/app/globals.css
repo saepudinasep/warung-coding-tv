@@ -1671,6 +1671,187 @@ footer {
   color: var(--text-mid);
 }
 
+.admin-form {
+  max-width: 560px;
+}
+.admin-form-field {
+  margin-bottom: 18px;
+}
+.admin-form-field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-mid);
+  margin-bottom: 6px;
+}
+.admin-form-field input[type='text'],
+.admin-form-field input[type='url'] {
+  width: 100%;
+  font-family: var(--font-body), sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-navy);
+  background: var(--white);
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.admin-form-field input:focus {
+  border-color: var(--gold);
+}
+.admin-form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--text-mid);
+}
+.admin-form-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+}
+.admin-form-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.admin-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.admin-form-error {
+  background: #fdecea;
+  border: 1px solid #f3c1bc;
+  color: #a63d33;
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+.btn-admin {
+  font-family: var(--font-body), sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+.btn-admin-primary {
+  background: var(--navy);
+  color: var(--ivory);
+}
+.btn-admin-primary:hover {
+  background: var(--navy-light);
+}
+.btn-admin-secondary {
+  background: transparent;
+  color: var(--text-mid);
+  border: 1px solid var(--border-navy);
+}
+.btn-admin-secondary:hover {
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.template-card {
+  border: 1px solid var(--border-navy);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--white);
+}
+.template-card-thumb {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--gold-pale);
+  position: relative;
+}
+.template-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.template-card-badges {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  gap: 6px;
+}
+.badge-premium {
+  font-size: 10px;
+  font-weight: 500;
+  background: var(--gold);
+  color: var(--navy);
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+.badge-inactive {
+  font-size: 10px;
+  font-weight: 500;
+  background: rgba(13, 27, 42, 0.75);
+  color: var(--ivory);
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+.template-card-body {
+  padding: 12px 14px;
+}
+.template-card-name {
+  font-weight: 500;
+  color: var(--navy);
+  font-size: 14px;
+}
+.template-card-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.template-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+.template-card-actions a,
+.template-card-actions button {
+  flex: 1;
+  font-family: var(--font-body), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 0;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--border-navy);
+  background: var(--white);
+  color: var(--text-mid);
+  transition: all 0.15s;
+}
+.template-card-actions a:hover,
+.template-card-actions button:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
 @media (max-width: 860px) {
   .admin-layout {
     flex-direction: column;

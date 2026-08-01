@@ -155,8 +155,54 @@ async function main() {
     }
   }
 
+  // --- Templates (untuk demo CRUD & ThemeGallery) ------------------
+  const templates = [
+    {
+      id: 'tpl-ivory-garden',
+      name: 'Ivory Garden',
+      category: 'Floral Elegant',
+      color: 'E8D5C4/5C4A3A',
+      isPremium: false,
+    },
+    {
+      id: 'tpl-midnight-gold',
+      name: 'Midnight Gold',
+      category: 'Premium',
+      color: '1E2F42/C9A96E',
+      isPremium: true,
+    },
+    {
+      id: 'tpl-warm-bloom',
+      name: 'Warm Bloom',
+      category: 'Warm Romantic',
+      color: 'EAD8B8/5C3A1E',
+      isPremium: false,
+    },
+    {
+      id: 'tpl-langit-malam',
+      name: 'Langit Malam',
+      category: 'Adat Modern',
+      color: '16213E/E8C5B0',
+      isPremium: true,
+    },
+  ];
+
+  for (const t of templates) {
+    await prisma.template.upsert({
+      where: { id: t.id },
+      update: {},
+      create: {
+        id: t.id,
+        name: t.name,
+        category: t.category,
+        thumbnail: `https://placehold.co/400x560/${t.color}?text=${encodeURIComponent(t.name)}`,
+        isPremium: t.isPremium,
+      },
+    });
+  }
+
   console.log(
-    'Seed selesai: 3 Package + 1 User admin + 1 User staff + 4 Customer dummy dengan order.',
+    'Seed selesai: 3 Package + 1 User admin + 1 User staff + 4 Customer dummy dengan order + 4 Template.',
   );
 }
 
