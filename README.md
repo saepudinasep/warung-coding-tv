@@ -37,9 +37,12 @@ Bagian ini **wajib** dilakukan sebelum menjalankan aplikasi — tanpa ini, halam
 Setelah `.env` terisi:
 
 ```bash
-npm run db:migrate   # membuat semua tabel di Neon sesuai prisma/schema.prisma
-npm run db:seed      # mengisi data awal: 3 Package (Gratis/Premium/Duo) + 1 User admin
+npm run db:migrate    # membuat semua tabel di Neon sesuai prisma/schema.prisma
+npm run db:generate   # generate Prisma Client (Prisma 7 tidak lagi otomatis setelah migrate)
+npm run db:seed       # mengisi data awal: Package, User admin+staff, Customer & Template dummy
 ```
+
+> Proyek ini pakai **Prisma 7** — koneksi database dikonfigurasi lewat `prisma.config.ts` di root project (bukan lagi lewat `url`/`directUrl` di `schema.prisma`). `prisma.config.ts` pakai `DIRECT_URL` (khusus CLI/migrate), sementara aplikasi saat runtime (`src/lib/prisma.ts`) pakai `DATABASE_URL` (pooled) lewat driver adapter `@prisma/adapter-pg`. Kedua variabel itu tetap harus diisi di `.env` seperti langkah 2 di atas.
 
 Cek hasilnya lewat Prisma Studio (GUI database di browser):
 
@@ -49,7 +52,7 @@ npm run db:studio
 
 > Catatan: `npm run db:seed` membuat user admin (`admin@warungcoding.tv`) dan user staff (`staff@warungcoding.tv`) — keduanya pakai password dummy `ganti-password-ini` (sudah di-hash bcrypt di `prisma/seed.ts`). User staff berguna untuk menguji role-based access control (menu **Template** cuma muncul/bisa diakses oleh role ADMIN). **Wajib ganti kedua password ini** sebelum dipakai di production — edit langsung di `prisma/seed.ts` sebelum seed pertama kali, atau update manual lewat Prisma Studio.
 
-Kalau schema berubah di kemudian hari (nambah kolom/tabel baru), jalankan ulang `npm run db:migrate` untuk generate migration baru — jangan edit tabel di Neon secara manual.
+Kalau schema berubah di kemudian hari (nambah kolom/tabel baru), jalankan ulang `npm run db:migrate` lalu `npm run db:generate` — jangan edit tabel di Neon secara manual.
 
 ## 4. Jalankan di Lokal
 
@@ -86,6 +89,7 @@ Buka [http://localhost:3000](http://localhost:3000).
 | `npm run format`       | Merapikan format kode dengan Prettier    |
 | `npm run format:check` | Cek format tanpa mengubah file           |
 | `npm run db:migrate`   | Menjalankan migrasi Prisma ke database   |
+| `npm run db:generate`  | Generate Prisma Client setelah migrate   |
 | `npm run db:seed`      | Mengisi data awal (Package + User admin) |
 | `npm run db:studio`    | Membuka Prisma Studio (GUI database)     |
 
