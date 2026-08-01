@@ -185,6 +185,13 @@ async function main() {
       color: '16213E/E8C5B0',
       isPremium: true,
     },
+    {
+      id: 'tpl-batik-klasik',
+      name: 'Batik Klasik',
+      category: 'Adat Modern',
+      color: '2E2010/C9A96E',
+      isPremium: true,
+    },
   ];
 
   for (const t of templates) {
@@ -202,7 +209,7 @@ async function main() {
   }
 
   console.log(
-    'Seed selesai: 3 Package + 1 User admin + 1 User staff + 4 Customer dummy dengan order + 4 Template.',
+    'Seed selesai: 3 Package + 1 User admin + 1 User staff + 4 Customer dummy dengan order + 5 Template.',
   );
 }
 

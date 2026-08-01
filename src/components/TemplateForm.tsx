@@ -44,9 +44,10 @@ export default function TemplateForm({ action, initial, submitLabel }: Props) {
         <datalist id="category-suggestions">
           <option value="Floral Elegant" />
           <option value="Premium" />
-          <option value="Modern Simple" />
-          <option value="Adat" />
+          <option value="Warm Romantic" />
+          <option value="Adat Modern" />
           <option value="Minimalist Earthy" />
+          <option value="Modern Simple" />
         </datalist>
       </div>
 
