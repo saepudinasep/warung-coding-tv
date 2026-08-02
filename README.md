@@ -65,18 +65,19 @@ npm run dev
 
 Buka [http://localhost:3000](http://localhost:3000).
 
-## 5. Setup Email Verifikasi (Brevo)
+## 5. Setup Email Verifikasi (Gmail SMTP)
 
 Dipakai untuk mengirim link verifikasi email ke customer yang baru daftar (wajib sebelum mereka bisa pakai paket Gratis).
 
-1. Daftar gratis di [brevo.com](https://brevo.com) (300 email/hari, permanen gratis).
-2. Buka **SMTP & API → API Keys**, buat key baru. Isi `BREVO_API_KEY` di `.env` dengan key tadi.
-3. Buka **Senders → Add a Sender**, masukkan email yang mau dipakai jadi pengirim (boleh email pribadi, mis. Gmail kamu — **tidak butuh domain sendiri**). Verifikasi lewat kode 6 digit yang dikirim ke email itu.
-4. Isi `BREVO_SENDER_EMAIL` di `.env` dengan email yang baru diverifikasi tadi.
+1. Aktifkan **2-Step Verification** di akun Gmail yang mau dipakai kirim (Google Account → Security → 2-Step Verification).
+2. Buka [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords), buat App Password baru (pilih nama bebas, mis. "Warung Coding TV"). Google akan kasih 16 karakter kode.
+3. Isi `.env`:
+   - `GMAIL_USER` — alamat Gmail pengirim
+   - `GMAIL_APP_PASSWORD` — 16 karakter App Password tadi (**bukan** password Gmail biasa — Google blokir SMTP dengan password akun biasa)
 
-> Kalau `BREVO_API_KEY`/`BREVO_SENDER_EMAIL` dikosongkan/tidak diisi, aplikasi tetap jalan normal — link verifikasi akan ditampilkan langsung di banner dashboard customer (mode fallback untuk development), bukan dikirim ke email.
+> Kalau `GMAIL_USER`/`GMAIL_APP_PASSWORD` dikosongkan/tidak diisi, aplikasi tetap jalan normal — link verifikasi akan ditampilkan langsung di banner dashboard customer (mode fallback untuk development), bukan dikirim ke email.
 >
-> Tanpa domain sendiri, Brevo tetap bisa kirim ke **email siapa pun** (beda dari sandbox default Resend yang cuma bisa ke email akun sendiri) — Brevo otomatis ganti alamat pengirim jadi domain Brevo di balik layar demi kepatuhan Gmail/Yahoo. Setelah punya domain sendiri (task "Setup domain & SSL"), authenticate domain itu di Brevo (**Domains → Add a domain**) untuk deliverability yang lebih baik dan alamat pengirim branded.
+> Gmail SMTP tanpa domain sendiri kadang masuk folder **spam** di sisi penerima (wajar, karena tidak ada SPF/DKIM/DMARC custom domain seperti provider email transactional). Untuk deliverability yang lebih baik nantinya (setelah punya domain sendiri), pertimbangkan pindah ke provider seperti Brevo/Resend dengan domain terautentikasi.
 
 ## 6. Deploy ke Vercel
 
@@ -93,7 +94,7 @@ Dipakai untuk mengirim link verifikasi email ke customer yang baru daftar (wajib
    - `NEXTAUTH_SECRET` (generate string acak baru, jangan pakai punya lokal)
    - `NEXTAUTH_URL` (isi dengan domain Vercel setelah deploy pertama, misal `https://warung-coding-tv.vercel.app`)
    - `NEXT_PUBLIC_SITE_URL` (sama seperti domain Vercel-nya — dipakai untuk link di email verifikasi)
-   - `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`
+   - `GMAIL_USER`, `GMAIL_APP_PASSWORD`, `GMAIL_SENDER_NAME`
 4. Klik **Deploy**. Setiap push berikutnya ke branch `main` otomatis trigger deploy ulang.
 
 ## Script yang Tersedia
