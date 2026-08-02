@@ -3,6 +3,7 @@
 import { useActionState } from 'react';
 import Link from 'next/link';
 import type { TemplateActionState } from '@/lib/actions/templates';
+import ThumbnailUploader from './ThumbnailUploader';
 
 type Initial = {
   name: string;
@@ -52,19 +53,8 @@ export default function TemplateForm({ action, initial, submitLabel }: Props) {
       </div>
 
       <div className="admin-form-field">
-        <label htmlFor="thumbnail">URL Thumbnail</label>
-        <input
-          id="thumbnail"
-          name="thumbnail"
-          type="url"
-          defaultValue={initial?.thumbnail}
-          placeholder="https://..."
-          required
-        />
-        <p className="admin-form-hint">
-          Tempel URL gambar untuk sekarang. Upload file langsung menyusul setelah object storage
-          terpasang (lihat to-do &ldquo;Upload galeri foto &amp; video&rdquo;).
-        </p>
+        <label>Thumbnail</label>
+        <ThumbnailUploader name="thumbnail" initialUrl={initial?.thumbnail} />
       </div>
 
       <div className="admin-form-field">
