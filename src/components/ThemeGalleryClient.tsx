@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import FadeUp from './FadeUp';
 
 type Theme = {
@@ -55,7 +56,13 @@ export default function ThemeGalleryClient({ templates }: { templates: Theme[] }
           {filtered.map((t) => (
             <div className="theme-card" key={t.id}>
               <div className="theme-card-img">
-                <img src={t.thumbnail} alt={t.name} loading="lazy" />
+                <Image
+                  src={t.thumbnail}
+                  alt={t.name}
+                  fill
+                  sizes="220px"
+                  style={{ objectFit: 'cover' }}
+                />
               </div>
               <div className="theme-label">
                 {t.name}

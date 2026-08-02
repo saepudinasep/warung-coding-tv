@@ -5,6 +5,7 @@ import { prisma } from '@/lib/prisma';
 import { updateInvitation } from '@/lib/actions/invitations';
 import InvitationForm from '@/components/InvitationForm';
 import CustomerSignOutButton from '@/components/CustomerSignOutButton';
+import MediaUploader from '@/components/MediaUploader';
 
 function toDatetimeLocal(date: Date) {
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -35,7 +36,7 @@ export default async function EditInvitationPage({ params }: { params: Promise<{
 
   const invitation = await prisma.invitation.findUnique({
     where: { id },
-    include: { order: true },
+    include: { order: true, media: { orderBy: { order: 'asc' } } },
   });
 
   if (!invitation || invitation.order.customerId !== session?.user?.id) {
@@ -75,6 +76,23 @@ export default async function EditInvitationPage({ params }: { params: Promise<{
             templateId: invitation.templateId,
           }}
         />
+
+        <div style={{ marginTop: 48, maxWidth: 640 }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display), serif',
+              fontSize: 20,
+              color: 'var(--navy)',
+              marginBottom: 8,
+            }}
+          >
+            Galeri Foto &amp; Video
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--text-mid)', marginBottom: 20 }}>
+            Foto dan video ini akan tampil di halaman undangan Anda.
+          </p>
+          <MediaUploader invitationId={invitation.id} initialMedia={invitation.media} />
+        </div>
       </div>
     </div>
   );

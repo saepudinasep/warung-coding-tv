@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { InvitationActionState } from '@/lib/actions/invitations';
 
 type Template = {
@@ -96,7 +97,13 @@ export default function InvitationForm({ action, templates, initial, submitLabel
                 }}
               >
                 <div className="template-picker-thumb">
-                  <img src={t.thumbnail} alt={t.name} loading="lazy" />
+                  <Image
+                    src={t.thumbnail}
+                    alt={t.name}
+                    fill
+                    sizes="140px"
+                    style={{ objectFit: 'cover' }}
+                  />
                 </div>
                 <div className="template-picker-name">{t.name}</div>
               </div>

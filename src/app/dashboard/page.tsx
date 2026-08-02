@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 import CustomerSignOutButton from '@/components/CustomerSignOutButton';
@@ -60,7 +61,13 @@ export default async function DashboardPage() {
               {invitations.map((inv) => (
                 <div className="dashboard-invite-card" key={inv.id}>
                   <div className="dashboard-invite-thumb">
-                    <img src={inv.template.thumbnail} alt={inv.template.name} loading="lazy" />
+                    <Image
+                      src={inv.template.thumbnail}
+                      alt={inv.template.name}
+                      fill
+                      sizes="140px"
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
                   <div className="dashboard-invite-body">
                     <div className="dashboard-invite-names">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 import { toggleTemplateActive } from '@/lib/actions/templates';
@@ -57,7 +58,13 @@ export default async function TemplatesPage() {
           {templates.map((t) => (
             <div className="template-card" key={t.id}>
               <div className="template-card-thumb">
-                <img src={t.thumbnail} alt={t.name} loading="lazy" />
+                <Image
+                  src={t.thumbnail}
+                  alt={t.name}
+                  fill
+                  sizes="(max-width: 640px) 50vw, 200px"
+                  style={{ objectFit: 'cover' }}
+                />
                 <div className="template-card-badges">
                   {t.isPremium && <span className="badge-premium">Premium</span>}
                   {!t.isActive && <span className="badge-inactive">Nonaktif</span>}

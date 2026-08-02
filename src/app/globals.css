@@ -1804,6 +1804,7 @@ footer {
   background: var(--white);
 }
 .template-card-thumb {
+  position: relative;
   height: 140px;
   background-size: cover;
   background-position: center;
@@ -1945,6 +1946,7 @@ footer {
   box-shadow: 0 0 0 1px var(--gold);
 }
 .template-picker-thumb {
+  position: relative;
   height: 110px;
   background: var(--gold-pale);
 }
@@ -1970,6 +1972,7 @@ footer {
   margin-bottom: 20px;
 }
 .dashboard-invite-thumb {
+  position: relative;
   flex: 0 0 140px;
   background: var(--gold-pale);
 }
@@ -2258,6 +2261,60 @@ footer {
   }
 }
 
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.media-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gold-pale);
+}
+.media-item img,
+.media-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.media-delete {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(13, 27, 42, 0.75);
+  color: var(--ivory);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.media-delete:hover {
+  background: #a63d33;
+}
+.media-upload-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.media-upload-label input {
+  display: none;
+}
+.media-empty-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
 /* ── PUBLIC INVITATION PAGE ── */
 .invite-page {
   background: var(--ivory);
@@ -2373,6 +2430,7 @@ footer {
 }
 
 .invite-cover {
+  position: relative;
   width: 100%;
   height: 320px;
   overflow: hidden;

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import CountdownTimer from '@/components/CountdownTimer';
 
@@ -18,7 +19,7 @@ const timeFormatter = new Intl.DateTimeFormat('id-ID', {
 async function getInvitation(slug: string) {
   return prisma.invitation.findUnique({
     where: { slug },
-    include: { template: true },
+    include: { template: true, media: { orderBy: { order: 'asc' } } },
   });
 }
 
@@ -87,7 +88,13 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
       </section>
 
       <div className="invite-cover">
-        <img src={invitation.template.thumbnail} alt={invitation.template.name} />
+        <Image
+          src={invitation.template.thumbnail}
+          alt={invitation.template.name}
+          fill
+          sizes="100vw"
+          style={{ objectFit: 'cover' }}
+        />
       </div>
 
       <section className="invite-section">
@@ -120,6 +127,26 @@ export default async function InvitationPage({ params }: { params: Promise<{ slu
           </div>
         )}
       </section>
+
+      {invitation.media.length > 0 && (
+        <section className="invite-section">
+          <p className="invite-section-label">Galeri</p>
+          <h2 className="invite-section-title">Kenangan Kami</h2>
+          <div className="media-grid">
+            {invitation.media.map((m) =>
+              m.type === 'VIDEO' ? (
+                <div className="media-item" key={m.id}>
+                  <video src={m.url} controls playsInline />
+                </div>
+              ) : (
+                <div className="media-item" key={m.id}>
+                  <Image src={m.url} alt="" fill sizes="120px" style={{ objectFit: 'cover' }} />
+                </div>
+              ),
+            )}
+          </div>
+        </section>
+      )}
 
       <footer className="invite-footer">
         <p>
