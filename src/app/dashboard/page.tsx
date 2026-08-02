@@ -75,6 +75,13 @@ export default async function DashboardPage() {
                     </div>
                     <div className="dashboard-invite-actions">
                       <Link
+                        href={`/${inv.slug}`}
+                        target="_blank"
+                        className="btn-admin btn-admin-primary"
+                      >
+                        Lihat Undangan
+                      </Link>
+                      <Link
                         href={`/dashboard/undangan/${inv.id}/edit`}
                         className="btn-admin btn-admin-secondary"
                       >
