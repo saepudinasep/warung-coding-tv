@@ -24,12 +24,27 @@ function slugify(text: string) {
     .replace(/-+/g, '-');
 }
 
+// Slug yang sudah dipakai route statis lain — kalau nama pasangan kebetulan
+// menghasilkan slug ini, treat sebagai "sudah dipakai" biar auto-suffix.
+const RESERVED_SLUGS = new Set([
+  'login',
+  'masuk',
+  'daftar',
+  'admin',
+  'dashboard',
+  'faq',
+  'syarat-ketentuan',
+  'kebijakan-privasi',
+  'verifikasi-email',
+  'api',
+]);
+
 async function generateUniqueSlug(groomName: string, brideName: string) {
   const base = slugify(`${groomName}-${brideName}`) || 'undangan';
   let slug = base;
   let attempt = 0;
 
-  while (await prisma.invitation.findUnique({ where: { slug } })) {
+  while (RESERVED_SLUGS.has(slug) || (await prisma.invitation.findUnique({ where: { slug } }))) {
     attempt += 1;
     slug = `${base}-${attempt + 1}`;
   }

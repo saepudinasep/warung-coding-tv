@@ -2258,6 +2258,207 @@ footer {
   }
 }
 
+/* ── PUBLIC INVITATION PAGE ── */
+.invite-page {
+  background: var(--ivory);
+}
+.invite-hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.invite-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  background-image: radial-gradient(circle at 30% 30%, var(--gold) 0%, transparent 55%);
+  pointer-events: none;
+}
+.invite-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  position: relative;
+}
+.invite-names {
+  font-family: var(--font-display), serif;
+  font-size: clamp(32px, 8vw, 56px);
+  font-style: italic;
+  color: var(--ivory);
+  line-height: 1.3;
+  margin-bottom: 24px;
+  position: relative;
+}
+.invite-names .amp {
+  color: var(--gold);
+  font-style: normal;
+  display: block;
+  font-size: 0.5em;
+  margin: 8px 0;
+}
+.invite-ornament {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+  position: relative;
+}
+.invite-date {
+  font-size: 15px;
+  color: rgba(250, 247, 242, 0.7);
+  letter-spacing: 0.03em;
+  margin-bottom: 40px;
+  position: relative;
+}
+.invite-countdown {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+.invite-countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.invite-countdown-num {
+  font-family: var(--font-display), serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--gold);
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.invite-countdown-label {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.45);
+}
+.invite-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 242, 0.35);
+  animation: invite-bounce 2s ease-in-out infinite;
+}
+@keyframes invite-bounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
+.invite-cover {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+.invite-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.invite-section {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  text-align: center;
+}
+.invite-section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.invite-section-title {
+  font-family: var(--font-display), serif;
+  font-size: 26px;
+  font-style: italic;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+.invite-detail-card {
+  background: var(--white);
+  border: 1px solid var(--border-navy);
+  border-radius: 12px;
+  padding: 28px 24px;
+  margin-bottom: 16px;
+}
+.invite-detail-card h3 {
+  font-family: var(--font-display), serif;
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.invite-detail-card p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+.invite-maps-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+}
+
+.invite-footer {
+  text-align: center;
+  padding: 48px 24px 64px;
+  border-top: 1px solid var(--border-navy);
+}
+.invite-footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.invite-footer a {
+  color: var(--navy);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  .invite-countdown {
+    gap: 10px;
+  }
+  .invite-countdown-num {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+}
+
 /* ── FULL-SCREEN LOADING ── */
 .page-loading {
   min-height: 100vh;
