@@ -1,5 +1,5 @@
 // ============================================================
-// Amoura — Undangan Digital Pernikahan + CRM
+// Warung Coding TV — Undangan Digital Pernikahan + CRM
 // Prisma schema (PostgreSQL / Neon)
 // ============================================================
 
@@ -82,13 +82,16 @@ model User {
 // ------------------------------------------------------------
 
 model Customer {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  phone     String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                          String    @id @default(cuid())
+  name                        String
+  email                       String    @unique
+  phone                       String
+  password                    String
+  emailVerified               DateTime?
+  verificationToken           String?   @unique
+  verificationTokenExpiresAt  DateTime?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
 
   orders Order[]
 

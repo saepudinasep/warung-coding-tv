@@ -63,26 +63,26 @@ async function main() {
   });
 
   // --- Admin user -------------------------------------------------
-  const hashedPassword = await bcrypt.hash('ganti-password-ini', 10);
+  const hashedPassword = await bcrypt.hash('admin12345', 10);
   await prisma.user.upsert({
-    where: { email: 'admin@warungcoding.tv' },
+    where: { email: 'warungcodingumi@gmail.com' },
     update: {},
     create: {
-      name: 'Admin',
-      email: 'admin@warungcoding.tv',
+      name: 'Warung Coding TV',
+      email: 'warungcodingumi@gmail.com',
       password: hashedPassword,
       role: 'ADMIN',
     },
   });
 
   // --- Staff user (untuk uji role-based access control) -----------
-  const staffPassword = await bcrypt.hash('ganti-password-ini', 10);
+  const staffPassword = await bcrypt.hash('staff12345', 10);
   await prisma.user.upsert({
-    where: { email: 'staff@warungcoding.tv' },
+    where: { email: 'saepudinasep2001@gmail.com' },
     update: {},
     create: {
       name: 'Staff CS',
-      email: 'staff@warungcoding.tv',
+      email: 'saepudinasep2001@gmail.com',
       password: staffPassword,
       role: 'STAFF',
     },
@@ -92,22 +92,22 @@ async function main() {
   const customerPassword = await bcrypt.hash('customer123', 10);
   const dummyCustomers = [
     {
-      name: 'Anisa Putri',
-      email: 'anisa@example.com',
+      name: 'Naradi Utama',
+      email: 'naradiutama8@gmail.com',
       phone: '081234567801',
       pkg: 'pkg-premium',
       status: 'PAID' as const,
     },
     {
-      name: 'Rizal Hidayat',
-      email: 'rizal@example.com',
+      name: 'Hadi Hakim',
+      email: 'adhiarja80@gmail.com',
       phone: '081234567802',
       pkg: 'pkg-duo',
       status: 'PAID' as const,
     },
     {
-      name: 'Dewi Lestari',
-      email: 'dewi@example.com',
+      name: 'Balangga Mahendra',
+      email: 'mahendrabalangga6@gmail.com',
       phone: '081234567803',
       pkg: 'pkg-gratis',
       status: 'PAID' as const,

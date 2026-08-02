@@ -65,7 +65,20 @@ npm run dev
 
 Buka [http://localhost:3000](http://localhost:3000).
 
-## 5. Deploy ke Vercel
+## 5. Setup Email Verifikasi (Brevo)
+
+Dipakai untuk mengirim link verifikasi email ke customer yang baru daftar (wajib sebelum mereka bisa pakai paket Gratis).
+
+1. Daftar gratis di [brevo.com](https://brevo.com) (300 email/hari, permanen gratis).
+2. Buka **SMTP & API → API Keys**, buat key baru. Isi `BREVO_API_KEY` di `.env` dengan key tadi.
+3. Buka **Senders → Add a Sender**, masukkan email yang mau dipakai jadi pengirim (boleh email pribadi, mis. Gmail kamu — **tidak butuh domain sendiri**). Verifikasi lewat kode 6 digit yang dikirim ke email itu.
+4. Isi `BREVO_SENDER_EMAIL` di `.env` dengan email yang baru diverifikasi tadi.
+
+> Kalau `BREVO_API_KEY`/`BREVO_SENDER_EMAIL` dikosongkan/tidak diisi, aplikasi tetap jalan normal — link verifikasi akan ditampilkan langsung di banner dashboard customer (mode fallback untuk development), bukan dikirim ke email.
+>
+> Tanpa domain sendiri, Brevo tetap bisa kirim ke **email siapa pun** (beda dari sandbox default Resend yang cuma bisa ke email akun sendiri) — Brevo otomatis ganti alamat pengirim jadi domain Brevo di balik layar demi kepatuhan Gmail/Yahoo. Setelah punya domain sendiri (task "Setup domain & SSL"), authenticate domain itu di Brevo (**Domains → Add a domain**) untuk deliverability yang lebih baik dan alamat pengirim branded.
+
+## 6. Deploy ke Vercel
 
 1. Push repo ini ke GitHub (repo kosong, tanpa README dari GitHub):
    ```bash
@@ -79,6 +92,8 @@ Buka [http://localhost:3000](http://localhost:3000).
    - `DIRECT_URL`
    - `NEXTAUTH_SECRET` (generate string acak baru, jangan pakai punya lokal)
    - `NEXTAUTH_URL` (isi dengan domain Vercel setelah deploy pertama, misal `https://warung-coding-tv.vercel.app`)
+   - `NEXT_PUBLIC_SITE_URL` (sama seperti domain Vercel-nya — dipakai untuk link di email verifikasi)
+   - `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`
 4. Klik **Deploy**. Setiap push berikutnya ke branch `main` otomatis trigger deploy ulang.
 
 ## Script yang Tersedia

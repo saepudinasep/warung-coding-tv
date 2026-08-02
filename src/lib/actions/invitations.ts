@@ -45,6 +45,11 @@ async function generateUniqueSlug(groomName: string, brideName: string) {
  * setelah task "Integrasi payment gateway" selesai.
  */
 async function findOrCreateAvailableOrder(customerId: string) {
+  const customer = await prisma.customer.findUnique({ where: { id: customerId } });
+  if (!customer) {
+    throw new Error('Akun tidak ditemukan.');
+  }
+
   const orders = await prisma.order.findMany({
     where: { customerId, status: 'PAID' },
     include: { package: true, invitations: { select: { id: true } } },
@@ -60,6 +65,15 @@ async function findOrCreateAvailableOrder(customerId: string) {
   if (hasAnyOrder) {
     throw new Error(
       'Kuota undangan pada paket Anda sudah penuh. Upgrade ke paket Premium/Duo akan tersedia setelah fitur pembayaran aktif.',
+    );
+  }
+
+  // Paket Gratis butuh email terverifikasi dulu — mencegah akun asal-asalan
+  // memakai kuota trial. Paket berbayar (setelah payment gateway ada) tidak
+  // kena syarat ini.
+  if (!customer.emailVerified) {
+    throw new Error(
+      'Verifikasi email Anda terlebih dahulu sebelum membuat undangan gratis. Cek link verifikasi di dashboard.',
     );
   }
 

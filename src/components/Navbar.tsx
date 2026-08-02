@@ -21,7 +21,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`site-nav${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`site-nav ${scrolled ? 'scrolled' : ''}`}>
       <Link href="/" className="nav-logo">
         Warung Coding TV<span>.</span>
       </Link>
@@ -55,12 +55,12 @@ export default function Navbar() {
       </button>
 
       {menuOpen && (
-        <div className="absolute top-full right-0 left-0 flex flex-col gap-1 border-b border-[var(--border-navy)] bg-[var(--ivory)] p-6 md:hidden">
+        <div className="bg-ivory absolute top-full right-0 left-0 flex flex-col gap-1 border-b border-(--border-navy) p-6 md:hidden">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="py-2 text-[15px] text-[var(--text-mid)]"
+              className="py-2 text-[15px] text-(--text-mid)"
               onClick={() => setMenuOpen(false)}
             >
               {item.label}

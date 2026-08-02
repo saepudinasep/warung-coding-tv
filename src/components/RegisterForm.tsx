@@ -79,10 +79,16 @@ export default function RegisterForm() {
               id="email"
               type="email"
               autoComplete="email"
+              placeholder="nama@gmail.com"
+              pattern="^[^\s@]+@gmail\.com$"
+              title="Gunakan alamat email @gmail.com"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 4 }}>
+              Wajib pakai alamat @gmail.com.
+            </p>
           </div>
           <div className="login-field">
             <label htmlFor="phone">Nomor WhatsApp</label>

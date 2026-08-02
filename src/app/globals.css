@@ -676,6 +676,7 @@ section {
   padding-bottom: 8px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 .themes-scroll::-webkit-scrollbar {
   display: none;
@@ -1711,7 +1712,12 @@ footer {
   margin-bottom: 6px;
 }
 .admin-form-field input[type='text'],
-.admin-form-field input[type='url'] {
+.admin-form-field input[type='url'],
+.admin-form-field input[type='email'],
+.admin-form-field input[type='tel'],
+.admin-form-field input[type='number'],
+.admin-form-field input[type='date'],
+.admin-form-field input[type='datetime-local'] {
   width: 100%;
   font-family: var(--font-body), sans-serif;
   font-size: 14px;
@@ -1909,6 +1915,7 @@ footer {
   .admin-table {
     display: block;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .order-detail-grid {
     grid-template-columns: 1fr;
@@ -2006,6 +2013,16 @@ footer {
 }
 
 @media (max-width: 640px) {
+  .admin-search {
+    flex-wrap: wrap;
+  }
+  .admin-search input {
+    width: 100%;
+  }
+  .admin-page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .dashboard-invite-card {
     flex-direction: column;
   }
@@ -2223,6 +2240,65 @@ footer {
   .pricing-card {
     padding: 32px 24px;
   }
+  .how-steps {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .template-picker-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+  .customer-detail-meta {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .order-detail-row {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+}
+
+/* ── FULL-SCREEN LOADING ── */
+.page-loading {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--ivory);
+}
+.page-loading.dark {
+  background: var(--navy);
+}
+.page-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(201, 169, 110, 0.25);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: page-loading-spin 0.7s linear infinite;
+}
+@keyframes page-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.page-loading-brand {
+  font-family: var(--font-display), serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--navy);
+  letter-spacing: 0.02em;
+}
+.page-loading.dark .page-loading-brand {
+  color: var(--ivory);
+}
+.page-loading-brand span {
+  color: var(--gold);
+}
+.page-loading-inline {
+  min-height: 50vh;
 }
 
 /* ── FADE-UP (scroll reveal) ── */
