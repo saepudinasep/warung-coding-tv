@@ -91,7 +91,12 @@ export default async function EditInvitationPage({ params }: { params: Promise<{
           <p style={{ fontSize: 13, color: 'var(--text-mid)', marginBottom: 20 }}>
             Foto dan video ini akan tampil di halaman undangan Anda.
           </p>
-          <MediaUploader invitationId={invitation.id} initialMedia={invitation.media} />
+          <MediaUploader
+            invitationId={invitation.id}
+            initialMedia={invitation.media
+              .filter((m) => m.type === 'PHOTO' || m.type === 'VIDEO')
+              .map((m) => ({ id: m.id, type: m.type as 'PHOTO' | 'VIDEO', url: m.url }))}
+          />
         </div>
       </div>
     </div>
