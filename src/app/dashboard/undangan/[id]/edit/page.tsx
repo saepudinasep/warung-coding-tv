@@ -6,6 +6,7 @@ import { updateInvitation } from '@/lib/actions/invitations';
 import InvitationForm from '@/components/InvitationForm';
 import CustomerSignOutButton from '@/components/CustomerSignOutButton';
 import MediaUploader from '@/components/MediaUploader';
+import MusicUploader from '@/components/MusicUploader';
 
 function toDatetimeLocal(date: Date) {
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -96,6 +97,27 @@ export default async function EditInvitationPage({ params }: { params: Promise<{
             initialMedia={invitation.media
               .filter((m) => m.type === 'PHOTO' || m.type === 'VIDEO')
               .map((m) => ({ id: m.id, type: m.type as 'PHOTO' | 'VIDEO', url: m.url }))}
+          />
+        </div>
+
+        <div style={{ marginTop: 40, maxWidth: 640 }}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display), serif',
+              fontSize: 20,
+              color: 'var(--navy)',
+              marginBottom: 8,
+            }}
+          >
+            Musik Latar
+          </h2>
+          <p style={{ fontSize: 13, color: 'var(--text-mid)', marginBottom: 20 }}>
+            Musik akan otomatis diputar (mode senyap) saat tamu membuka undangan Anda — mereka
+            tinggal ketuk ikon speaker untuk menyalakan suaranya.
+          </p>
+          <MusicUploader
+            invitationId={invitation.id}
+            initialUrl={invitation.media.find((m) => m.type === 'MUSIC')?.url}
           />
         </div>
       </div>

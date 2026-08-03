@@ -11,7 +11,7 @@ const navItems = [
   { href: '/admin/templates', label: 'Template', adminOnly: true },
 ];
 
-export default function AdminNav() {
+export default function AdminNav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const { data: session } = useSession();
   const role = session?.user?.role;
@@ -24,7 +24,12 @@ export default function AdminNav() {
           const isActive =
             item.href === '/admin' ? pathname === '/admin' : pathname.startsWith(item.href);
           return (
-            <Link key={item.href} href={item.href} className={isActive ? 'active' : ''}>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={isActive ? 'active' : ''}
+              onClick={onNavigate}
+            >
               {item.label}
             </Link>
           );

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { auth } from '@/auth';
-import SignOutButton from '@/components/SignOutButton';
-import AdminNav from '@/components/AdminNav';
+import AdminSidebar from '@/components/AdminSidebar';
 
 export const metadata: Metadata = {
   title: {
@@ -16,22 +15,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="admin-layout">
-      <aside className="admin-sidebar">
-        <div className="admin-sidebar-logo">
-          Warung Coding TV<span>.</span>
-          <div style={{ fontSize: 11, color: 'rgba(250,247,242,0.4)', marginTop: 4 }}>
-            CRM Admin
-          </div>
-        </div>
-        <AdminNav />
-        <div className="admin-sidebar-footer">
-          <div className="admin-sidebar-user">
-            <strong>{session?.user?.name}</strong>
-            {session?.user?.role}
-          </div>
-          <SignOutButton />
-        </div>
-      </aside>
+      <AdminSidebar userName={session?.user?.name} userRole={session?.user?.role} />
       <main className="admin-main">{children}</main>
     </div>
   );

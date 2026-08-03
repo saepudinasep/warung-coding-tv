@@ -1391,6 +1391,54 @@ footer {
   border-radius: 20px;
 }
 
+.admin-mobile-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--navy);
+  padding: 14px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.admin-mobile-topbar .admin-sidebar-logo {
+  padding: 0;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.admin-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.admin-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ivory);
+}
+.admin-mobile-menu {
+  position: sticky;
+  top: 57px;
+  z-index: 49;
+  background: var(--navy);
+  border-top: 1px solid rgba(201, 169, 110, 0.15);
+  padding: 8px 0 16px;
+}
+.admin-mobile-menu .admin-nav {
+  flex-direction: column;
+}
+.admin-mobile-menu .admin-sidebar-footer {
+  display: block;
+  padding: 16px 24px 0;
+  margin-top: 8px;
+  border-top: 1px solid rgba(201, 169, 110, 0.15);
+}
+
 /* ── ADMIN LAYOUT ── */
 .admin-layout {
   min-height: 100vh;
@@ -1889,26 +1937,10 @@ footer {
     flex-direction: column;
   }
   .admin-sidebar {
-    flex: none;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 12px 0;
-  }
-  .admin-sidebar-logo,
-  .admin-sidebar-footer {
     display: none;
   }
-  .admin-nav {
-    flex-direction: row;
-  }
-  .admin-nav a {
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-  }
-  .admin-nav a.active {
-    border-left-color: transparent;
-    border-bottom-color: var(--gold);
+  .admin-mobile-topbar {
+    display: flex;
   }
   .admin-main {
     padding: 24px 20px;
@@ -2337,6 +2369,75 @@ footer {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 16px;
+}
+
+.music-uploader-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--white);
+  border: 1px solid var(--border-navy);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+.music-uploader-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gold-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.music-uploader-info {
+  flex: 1;
+  min-width: 0;
+}
+.music-uploader-name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.music-uploader-empty {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.invite-mute-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 1px solid rgba(201, 169, 110, 0.4);
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(13, 27, 42, 0.3);
+  animation: invite-mute-pulse 2.5s ease-in-out infinite;
+}
+@keyframes invite-mute-pulse {
+  0%,
+  100% {
+    box-shadow: 0 8px 24px rgba(13, 27, 42, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 8px 24px rgba(13, 27, 42, 0.3),
+      0 0 0 8px rgba(201, 169, 110, 0.1);
+  }
 }
 
 /* ── PUBLIC INVITATION PAGE ── */
