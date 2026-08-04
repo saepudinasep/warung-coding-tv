@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 import { updateInvitation } from '@/lib/actions/invitations';
@@ -62,9 +63,16 @@ export default async function EditInvitationPage({ params }: { params: Promise<{
       </div>
       <div className="admin-content" style={{ maxWidth: 720 }}>
         <h1>Edit Undangan</h1>
-        <p style={{ marginBottom: 28 }}>
+        <p style={{ marginBottom: 12 }}>
           {invitation.groomName} &amp; {invitation.brideName}
         </p>
+        <Link
+          href={`/dashboard/undangan/${invitation.id}/tamu`}
+          className="btn-admin btn-admin-secondary"
+          style={{ marginBottom: 28, display: 'inline-flex' }}
+        >
+          Kelola Tamu &amp; RSVP →
+        </Link>
         <InvitationForm
           action={boundUpdate}
           templates={templates}

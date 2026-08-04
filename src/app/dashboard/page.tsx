@@ -94,6 +94,12 @@ export default async function DashboardPage() {
                       >
                         Edit
                       </Link>
+                      <Link
+                        href={`/dashboard/undangan/${inv.id}/tamu`}
+                        className="btn-admin btn-admin-secondary"
+                      >
+                        Tamu
+                      </Link>
                     </div>
                   </div>
                 </div>
